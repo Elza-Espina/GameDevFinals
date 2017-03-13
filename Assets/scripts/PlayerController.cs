@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     int waterctr = 200;
+    public float gaslevel = 10f;
 
     public float moveSpeed = 0.0f;
     public Vector2 velocityCheck = new Vector2(20.0f, 0.0f);
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        gaslevel -= Time.deltaTime;
         float forceX = 0.0f;
         float forceY = 0.0f;
 
@@ -38,7 +39,10 @@ public class PlayerController : MonoBehaviour
             animator.SetInteger("animState", 0);
         }
 
-        if (input.moving.x != 0)
+
+        if (gaslevel > 0)
+        {
+            if (input.moving.x != 0)
         {
             forceX = moveSpeed * input.moving.x;
             if (playerAbsVelX <= velocityCheck.x)
@@ -55,7 +59,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
+        }else
+        {
+            Debug.Log("no more gas");
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            GetComponent<Rigidbody2D>().angularVelocity = 0;
+        }
 
         if (Input.GetKey("space"))
         {
@@ -74,10 +84,17 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.CompareTag("hydrant") && Input.GetKey(KeyCode.DownArrow))
+        if ( Input.GetKey(KeyCode.DownArrow))
         {
-            Debug.Log("hydrating... water level:"+waterctr);
-            waterctr++;
+            if (coll.CompareTag("hydrant")) {
+                Debug.Log("hydrating... water level:" + waterctr);
+                waterctr++;
+            }
+            if (coll.CompareTag("gas"))
+            {
+                Debug.Log("refilling gas... gas level:" + gaslevel);
+                gaslevel++;
+            }
         }
     }
 

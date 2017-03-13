@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\scripts\FireController.cs" />
      <Compile Include="Assets\scripts\Level1Controller.cs" />
+     <Compile Include="Assets\scripts\PipController.cs" />
      <Compile Include="Assets\scripts\PlayerController.cs" />
      <Compile Include="Assets\scripts\PlayerInput.cs" />
      <Compile Include="Assets\scripts\WaterController.cs" />
