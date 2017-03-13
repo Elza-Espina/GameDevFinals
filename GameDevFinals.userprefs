@@ -1,9 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\PlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\SimpleShooter\Assets\scripts\EnemySpawnerController.cs">
     <Files>
-      <File FileName="Assets\scripts\TimeLimitController.cs" Line="1" Column="1" />
-      <File FileName="Assets\scripts\PlayerController.cs" Line="17" Column="35" />
+      <File FileName="Assets\scripts\TimeLimitController.cs" Line="21" Column="87" />
+      <File FileName="Assets\scripts\PlayerController.cs" Line="31" Column="59" />
+      <File FileName="..\..\YellowMonsterGame\Assets\scripts\CoinController.cs" Line="27" Column="63" />
+      <File FileName="..\..\SimpleShooter\Assets\scripts\EnemySpawnerController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

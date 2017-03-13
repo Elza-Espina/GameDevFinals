@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 public class PlayerController : MonoBehaviour
 {
 
@@ -9,24 +10,31 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public PlayerInput input;
     
-	public float CurrFuel = 10;
-	public float MaxFuel = 10;
+	public float CurrFuel = 35;
+	public float MaxFuel = 35;
 
-	public Image Fuel;
+	public float CurrWat = 10;
+	public float MaxWat = 10;
+
+	public Text Fuel;
+	public Text Wat;
+
+	public AudioClip engine;
+	public AudioClip siren;
 
     // Use this for initialization
     void Start()
     {
-
+		Fuel = GameObject.Find ("Fuel").GetComponent<Text> ();
         animator = GetComponent<Animator>();
         input = GetComponent<PlayerInput>();
-
+		AudioSource.PlayClipAtPoint (engine,transform.position);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+		
         float forceX = 0.0f;
         float forceY = 0.0f;
 
@@ -40,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (input.moving.x != 0 && CurrFuel > 0)
         {
+			
 			CurrFuel -= Time.deltaTime;
 			updateGauge();
             forceX = moveSpeed * input.moving.x;
@@ -64,7 +73,7 @@ public class PlayerController : MonoBehaviour
     }
 
 	public void updateGauge(){
-		Fuel.fillAmount = CurrFuel / MaxFuel;
+		Fuel.text = Math.Round(((CurrFuel / MaxFuel)*100), 2).ToString();
 		Debug.Log(CurrFuel);
 	}
 }
