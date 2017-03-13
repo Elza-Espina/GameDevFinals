@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
 
@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     public PlayerInput input;
     
-	public float CurrFuel = 35;
-	public float MaxFuel = 35;
+	public float CurrFuel = 10;
+	public float MaxFuel = 10;
+
+	public Image Fuel;
 
     // Use this for initialization
     void Start()
@@ -39,6 +41,7 @@ public class PlayerController : MonoBehaviour
         if (input.moving.x != 0 && CurrFuel > 0)
         {
 			CurrFuel -= Time.deltaTime;
+			updateGauge();
             forceX = moveSpeed * input.moving.x;
             if (playerAbsVelX <= velocityCheck.x)
             {                
@@ -59,4 +62,9 @@ public class PlayerController : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(forceX, forceY), ForceMode2D.Impulse);
 
     }
+
+	public void updateGauge(){
+		Fuel.fillAmount = CurrFuel / MaxFuel;
+		Debug.Log(CurrFuel);
+	}
 }
